@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.row {
+    width: 100%;
+    min-height: 969px;
+    background-color: #3e3e3e;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    text-align: center;
+    background-color: #333;
+}
+
+/* enemyCard */
+.enemyCards {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    border-radius: 3px;
+    padding-bottom: 10px;
+}
+.enemyCard {
+    width: 18%;
+    min-height: 200px;
+    display: inline-block;
+    margin: 1%;
+    border-radius: 3px;
+}
+
+.cardTitle {
+    width: 100%;
+    height: 25%;
+    background-color: #f5eded;
+    font-weight: bold;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.spellSection {
+    width: 100%;
+    height: 25%;
+    background-color: #282828;
+    font-weight: bold;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.timerSection {
+    width: 100%;
+    height: 25%;
+    background-color: #afb597;
+    font-weight: bold;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.timerSection:hover {
+    cursor: pointer;
+    background-color: #a6bd4a;
+    color: #c4f110;
+}
+.flashStatus {
+    height: 25%;
+    background-color: #c4f110;
+}
+/* timerCard */
+.timerCard {
+    width: 80%;
+    height: 200px;
+    background-color: #282828;
+    display: inline-block;
+    text-align: unset;
+    margin: 1%;
+    border-radius: 3px;
+    color:#FFFFFF;
+}
+.timerRole {
+    font-size:50px;
+    margin-left: 10%;
+}
+.timer {
+    font-size:200px;
+}
