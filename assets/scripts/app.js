@@ -5,8 +5,23 @@ const flashTime = {
     rune: 285,
     boots: 270,
     runeAndBoots: 255,
-
 };
+
+const roleTranslate = (role) => {
+    switch (role) {
+        case "TOP":
+            return "Ust";
+        case "JUNGLE":
+            return "Orman";
+        case "MID":
+            return "Orta";
+        case "ADC":
+            return "Nisanci";
+        case "SUP":
+            return "Destek";
+    }
+}
+
 const getFlashTime = (index) => {
     switch (index) {
         case -1:
@@ -85,6 +100,7 @@ class Match {
         for (let i = 0; i < 5; i++) {
             let card = document.createElement('div');
             card.className = "enemyCard";
+            card.id = getRole(i);
             card.dataset.role = getRole(i);
             let cardTitle = document.createElement('div');
             cardTitle.className = "cardTitle";
