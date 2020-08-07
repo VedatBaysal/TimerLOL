@@ -11,18 +11,22 @@
 <body>
     <div class="row">
         <div class="container">
+            <a id="startButton">Start</a>
         </div>
     </div>
     <script src="assets/scripts/app.js"></script>
     <script src="assets/scripts/voice.js"></script>
     <script>
-   
-    document.addEventListener("DOMContentLoaded", () => {
-        let startMatch = new Match(new Timer());
-        startMatch.enemyCard();
-        recognition.start();
-        console.log("Written by VedatBaysal");
-    });
+        let btnStart = document.querySelector("#startButton");
+        btnStart.addEventListener("click", () => {
+            let startMatch = new Match(new Timer());
+            startMatch.enemyCard();
+            recognition.start();
+            btnStart.remove();
+        })
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("Written by VedatBaysal");
+        });
     </script>
 </body>
 
