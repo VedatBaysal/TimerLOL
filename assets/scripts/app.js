@@ -72,17 +72,25 @@ class Timer {
         return getAllActiveTimer().short((x, y) => x.dataset.timer < y.dataset.timer);
     }
     setTimer(node) {
+        let parentNode;
         let timer = setInterval(() => {
+            parentNode = node.parentNode;
             node.dataset.time = node.dataset.time - 1;
             if (node.dataset.time > 0) {
                 node.textContent = this.secondToMin(node.dataset.time);
-                if (node.textContent === 60) {
-                    console.log("Son 1 Dakika");
-                } else if (node.textContent < 60) {
-
+                if (node.dataset.time == 60) {
+                    readOutLound(parentNode.dataset.role+" siçrasina son bir dakika");
+                } else if (node.dataset.time < 60) {
+                    let status = document.querySelector("#" + parentNode.dataset.role)
+                    .querySelector(".flashStatus");
+                    if(status.getAttribute("style")) {
+                        status.removeAttribute("style");
+                    } else {
+                        status.style = "background-color:#FF0000";
+                    }
                 }
-            } else if (node.dataset.time === 0) {
-                node.remove();
+            } else {
+                parentNode.remove();
                 clearInterval(timer);
             }
 
