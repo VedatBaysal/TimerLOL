@@ -79,11 +79,11 @@ class Timer {
             if (node.dataset.time > 0) {
                 node.textContent = this.secondToMin(node.dataset.time);
                 if (node.dataset.time == 60) {
-                    readOutLound(parentNode.dataset.role+" siçrasina son bir dakika");
+                    readOutLound(parentNode.dataset.role + " siçrasina son bir dakika");
                 } else if (node.dataset.time < 60) {
                     let status = document.querySelector("#" + parentNode.dataset.role)
-                    .querySelector(".flashStatus");
-                    if(status.getAttribute("style")) {
+                        .querySelector(".flashStatus");
+                    if (status.getAttribute("style")) {
                         status.removeAttribute("style");
                     } else {
                         status.style = "background-color:#FF0000";
@@ -91,6 +91,7 @@ class Timer {
                 }
             } else {
                 parentNode.remove();
+                readOutLound(parentNode.dataset.role + " siçrasi geldi");
                 clearInterval(timer);
             }
 
@@ -147,7 +148,13 @@ class Match {
             timerSection.addEventListener("click", (e) => {
                 e.disabled = true;
                 this.timerCard(getRole(i));
-                flashStatus.style = "background-color:#FF0000";
+                if (flashStatus.getAttribute("style")) {
+                    flashStatus.removeAttribute("style");
+                    readOutLound(getRole(i) + " siçrasi geldi");
+                } else {
+                    flashStatus.style = "background-color:#FF0000";
+                    readOutLound(getRole(i) + " siçra kullandi");
+                }
             })
             card.appendChild(cardTitle);
             card.appendChild(spellSection);
