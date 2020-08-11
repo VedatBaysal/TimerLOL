@@ -1,5 +1,5 @@
 const content = document.querySelector(".container");
-
+const timers = [];
 const flashTime = {
     standard: 300,
     rune: 285,
@@ -71,31 +71,50 @@ class Timer {
     orderTimers() {
         return getAllActiveTimer().short((x, y) => x.dataset.timer < y.dataset.timer);
     }
-    setTimer(node) {
+    removeTimer(role) {
+        let t = timers.filter(x => x.role === role);
+        t.forEach(x => {
+            let index = timers.indexOf(x);
+            timers.splice(index,1);
+            console.log(timers);
+            clearInterval(x.timer);
+        });
+    }
+    setTimer(node,role) {
         let parentNode;
         let timer = setInterval(() => {
+            console.log("çalışıyorum...");
             parentNode = node.parentNode;
+            role = parentNode.dataset.role;
             node.dataset.time = node.dataset.time - 1;
             if (node.dataset.time > 0) {
                 node.textContent = this.secondToMin(node.dataset.time);
                 if (node.dataset.time == 60) {
-                    readOutLound(parentNode.dataset.role + " siçrasina son bir dakika");
+                    readOutLound(role + " siçrasina son bir dakika");
                 } else if (node.dataset.time < 60) {
-                    let status = document.querySelector("#" + parentNode.dataset.role)
-                        .querySelector(".flashStatus");
-                    if (status.getAttribute("style")) {
-                        status.removeAttribute("style");
-                    } else {
-                        status.style = "background-color:#FF0000";
-                    }
+                    this.changeStatus(role);
                 }
             } else {
                 parentNode.remove();
-                readOutLound(parentNode.dataset.role + " siçrasi geldi");
-                clearInterval(timer);
+                readOutLound(role + " siçrasi geldi");
+                this.changeStatus(role,true);
             }
 
-        }, 1000);
+        }, 100);
+        timers.push({role: role, timer: timer});
+        console.log(timers);
+    }
+    changeStatus(role, isRemoveTimer) {
+        let status = document.querySelector("#" + role)
+            .querySelector(".flashStatus");
+        if (status.getAttribute("style")) {
+            status.removeAttribute("style");
+            if(isRemoveTimer) {
+                this.removeTimer(role);
+            }
+        } else {
+            status.style = "background-color:#FF0000";
+        }
     }
 }
 
@@ -147,14 +166,9 @@ class Match {
             }
             timerSection.addEventListener("click", (e) => {
                 e.disabled = true;
-                this.timerCard(getRole(i));
-                if (flashStatus.getAttribute("style")) {
-                    flashStatus.removeAttribute("style");
-                    readOutLound(getRole(i) + " siçrasi geldi");
-                } else {
-                    flashStatus.style = "background-color:#FF0000";
-                    readOutLound(getRole(i) + " siçra kullandi");
-                }
+                this.timerCard(getRole(i), () => {
+                    this.timer.changeStatus(getRole(i),true);
+                });
             })
             card.appendChild(cardTitle);
             card.appendChild(spellSection);
@@ -173,6 +187,9 @@ class Match {
             for (let i = 0; i < el.length; i++) {
                 if (el[i].dataset.role === role) {
                     el[i].remove();
+                    if (callback) {
+                        callback();
+                    }
                     return;
                 }
             }
@@ -187,7 +204,7 @@ class Match {
         timer.className = "timer";
         timer.textContent = "05.00";
         timer.dataset.time = 300;
-        this.timer.setTimer(timer, 300);
+        this.timer.setTimer(timer, role);
         card.appendChild(timerRole);
         card.appendChild(timer);
         content.appendChild(card);
