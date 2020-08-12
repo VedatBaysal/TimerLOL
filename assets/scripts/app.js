@@ -1,54 +1,5 @@
 const content = document.querySelector(".container");
 const timers = [];
-const flashTime = {
-    standard: 300,
-    rune: 285,
-    boots: 270,
-    runeAndBoots: 255,
-};
-
-const roleTranslate = (role) => {
-    switch (role) {
-        case "TOP":
-            return "Ust";
-        case "JUNGLE":
-            return "Orman";
-        case "MID":
-            return "Orta";
-        case "ADC":
-            return "Nisanci";
-        case "SUP":
-            return "Destek";
-    }
-}
-
-const getFlashTime = (index) => {
-    switch (index) {
-        case -1:
-            return flashTime.standard;
-        case 0:
-            return flashTime.rune;
-        case 1:
-            return flashTime.boots;
-        case 2:
-            return flashTime.runeAndBoots;
-    }
-}
-
-const getRole = (index) => {
-    switch (index) {
-        case 0:
-            return "TOP"
-        case 1:
-            return "JUNGLE"
-        case 2:
-            return "MID"
-        case 3:
-            return "ADC"
-        case 4:
-            return "SUP"
-    }
-}
 
 class Timer {
     secondToMin(duration) {
@@ -76,14 +27,12 @@ class Timer {
         t.forEach(x => {
             let index = timers.indexOf(x);
             timers.splice(index,1);
-            console.log(timers);
             clearInterval(x.timer);
         });
     }
     setTimer(node,role) {
         let parentNode;
         let timer = setInterval(() => {
-            console.log("çalışıyorum...");
             parentNode = node.parentNode;
             role = parentNode.dataset.role;
             node.dataset.time = node.dataset.time - 1;
@@ -100,9 +49,8 @@ class Timer {
                 this.changeStatus(role,true);
             }
 
-        }, 100);
+        }, 1000);
         timers.push({role: role, timer: timer});
-        console.log(timers);
     }
     changeStatus(role, isRemoveTimer) {
         let status = document.querySelector("#" + role)
