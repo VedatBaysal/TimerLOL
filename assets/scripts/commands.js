@@ -1,4 +1,4 @@
-let roleCommands = [
+const roleCommands = [
     ["top", "üst"],
     ["jungle", "ormancı"],
     ["mid", "orta"],
@@ -6,7 +6,7 @@ let roleCommands = [
     ["sup", "support", "destek"]
 ];
 
-let spellCommands = [
+const spellCommands = [
     ["flash", "sıçra"],
     ["heal", "şifa"],
     ["ignite", "tutuştur"],

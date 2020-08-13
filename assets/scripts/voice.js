@@ -14,7 +14,6 @@ recognition.onresult = (e) => {
     const isFinal = e.results[index].isFinal
     if (isFinal === true) {
         const transcript = e.results[index][0].transcript.toLowerCase();
-        console.log(transcript);
         commands(transcript);
     }
 }
