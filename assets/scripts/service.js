@@ -45,6 +45,26 @@ const getFlashTime = (index) => {
     }
 }
 
+const getAllSpellImagesSection = (isHidden) => {
+    let span = "<span class='allSpellImage'>";
+    let imageList = "";
+    for (let i = 0; i < spellCommands.length; i++) {
+        if(isHidden && i > 0) {
+            imageList += `<img src="./assets/images/${spellCommands[i][0]}.png" class='hidden'/>`;
+        } else {
+            imageList += `<img src="./assets/images/${spellCommands[i][0]}.png" />`;
+        }
+            
+        
+    }
+    span += imageList + '</span>';
+    return span;
+}
+
+const getSpellTime = (role,spell) => {
+
+}
+
 let response = {
     lastMinute(role) {
         return roleTranslate(role) + "Sicrasina 1 dakika kaldi"

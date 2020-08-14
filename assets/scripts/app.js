@@ -112,6 +112,28 @@ class Match {
                 spellSection.appendChild(el);
                 spellSection.appendChild(txt);
             }
+            let spell = document.createElement('div');
+            spell.className = "spell";
+            spell.innerHTML = ""
+            let choiceSpell = document.createElement('div');
+            choiceSpell.className = "choiceSpell";
+            for (let j = 0; j < 2; j++) {
+                let selectSpell = document.createElement('span');
+                selectSpell.dataset.key = j === 0 ? "d" : "f";
+                let spell = document.createElement('span');
+
+                selectSpell.innerHTML = "&nbsp"
+                //let allSpellImages = document.createElement("span");
+                selectSpell.innerHTML = getAllSpellImagesSection(true);
+                //spell.appendChild(allSpellImages);
+
+                selectSpell.addEventListener("click",() => {
+                    selectSpell.innerHTML = getAllSpellImagesSection(false);
+                })
+                choiceSpell.appendChild(selectSpell);
+            }
+            spell.appendChild(choiceSpell)
+            spellSection.appendChild(spell);
             timerSection.addEventListener("click", (e) => {
                 e.disabled = true;
                 this.timerCard(getRole(i), () => {

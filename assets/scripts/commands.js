@@ -10,6 +10,7 @@ const spellCommands = [
     ["flash", "sıçra"],
     ["heal", "şifa"],
     ["ignite", "tutuştur"],
+    ["exhaust", "bitkinlik"],
     ["teleport", "ışınla"],
     ["barrier", "bariyer"],
     ["ghost", "hayalet"],

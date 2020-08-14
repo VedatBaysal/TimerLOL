@@ -6,7 +6,7 @@ isStopped = false;
 recognition.lang = "tr-TR";
 recognition.onstart = () => {
     if(!isStopped)
-    readOutLound("Hos Geldin");
+    //readOutLound("Hos Geldin");
     console.log("voice is activated");
 }
 recognition.onresult = (e) => {
