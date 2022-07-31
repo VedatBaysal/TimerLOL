@@ -1,10 +1,15 @@
 const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.speechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 recognition.continuous = true;
 recognition.interimResults = true;
 isStopped = false;
 recognition.lang = "tr-TR";
+
+window.addEventListener("unload", () => {
+  recognition.stop();
+});
+
 recognition.onstart = () => {
   if (!isStopped) readOutLound("Hos Geldin");
   console.log("voice is activated");

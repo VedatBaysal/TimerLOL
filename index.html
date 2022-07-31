@@ -21,8 +21,9 @@
         btnStart.addEventListener("click", () => {
             let startMatch = new Match(new Timer());
             startMatch.enemyCard();
-            recognition.start();
             btnStart.remove();
+            recognition.start();
+
         })
         document.addEventListener("DOMContentLoaded", () => {
             console.log("Written by VedatBaysal");
